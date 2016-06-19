@@ -1,0 +1,14 @@
+[package]
+name = "irony"
+version = "0.1.0"
+authors = ["Tglman <tglman@tglman.com>"]
+
+[dependencies]
+iron="*"
+router="*"
+mount="*"
+rand="*"
+liquid = "0.8.0"
+staticfile = "*"
+
+
