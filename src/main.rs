@@ -12,14 +12,13 @@ use router::Router;
 use mount::Mount;
 use rand::distributions::{IndependentSample, Range};
 
-use std::io;
 use std::io::prelude::*;
 use std::io::BufReader;
 use std::fs::File;
 use std::path::Path;
 
 
-use liquid::{Renderable, Context, Value, Template};
+use liquid::{Renderable, Context, Template};
 
 
 fn fortune() -> String {
@@ -29,7 +28,7 @@ fn fortune() -> String {
 
 
     loop {
-        let f = File::open("/usr/share/games/fortunes/fortunes").unwrap();
+        let f = File::open("./data/fortunes").unwrap();
         let reader = BufReader::new(f);
         let mut string_res = String::new();
         for line in reader.lines() {
@@ -49,7 +48,7 @@ fn fortune() -> String {
 }
 
 
-fn fortune_handler(req: &mut Request, template: liquid::Template) -> IronResult<Response> {
+fn fortune_handler(_: &mut Request, template: liquid::Template) -> IronResult<Response> {
     let mut context = Context::new();
     context.set_val("content", liquid::Value::Str(fortune()));
     let output = template.render(&mut context).unwrap().unwrap();
